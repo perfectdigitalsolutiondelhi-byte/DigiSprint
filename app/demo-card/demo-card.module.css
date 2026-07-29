@@ -993,3 +993,8 @@
     transform: none !important;
   }
 }
+
+/* Version 0.7 — readable type and compact card rhythm */
+.backLink,.shareButtons button,.contactAction strong,.phoneBar a,.inlineLink,.ctaButton{font-size:14px}.verifiedBadge,.company,.sectionLabel>span,.microLabel,.phoneBar div span,.availablePill,.qrWrap small{font-size:12px}.bio,.infoCard>p:not(.microLabel),.serviceList li,.detailList>div,.infoCard address,.qrSection>div:first-child>p:last-child,.ctaSection p:not(.microLabel),.demoNote p{font-size:15px}.contactSection,.businessSection,.socialSection{padding:44px 0}.shareButtons{margin-bottom:44px}.contactAction{min-height:96px}.contactAction>span{font-size:15px}.infoCard{min-height:185px;padding:23px}.socialGrid a{min-height:84px}.socialGrid small{font-size:12px}.qrSection{padding:30px}.qrCode span{font-size:12px}.ctaSection{padding:38px}.footer{font-size:14px}.shell{margin-bottom:74px}.identityBlock{padding-bottom:40px}.cardBody{padding-bottom:44px}
+@media(max-width:760px){.contactSection,.businessSection,.socialSection{padding:38px 0}}
+@media(max-width:560px){.backLink{font-size:12px}.shell{margin-bottom:52px}.identityBlock{padding-bottom:30px}.cardBody{padding-bottom:30px}.infoCard{min-height:auto;padding:22px}.qrSection{padding:24px 20px}.ctaSection{padding:28px 22px}.contactSection,.businessSection,.socialSection{padding:34px 0}}

@@ -1,24 +1,9 @@
-import styles from "@/app/demo-profile/demo-profile.module.css";
+﻿import styles from "@/app/demo-profile/demo-profile.module.css";
 
 const projects = [
-  {
-    type: "Product transformation",
-    title: "Reimagining everyday money management",
-    summary: "Led the strategy and cross-functional operating model for a mobile banking experience serving 4.8 million customers.",
-    result: "+31% monthly engagement",
-  },
-  {
-    type: "Market expansion",
-    title: "A platform built for six new markets",
-    summary: "Created a modular launch playbook that balanced local customer needs with a scalable global product foundation.",
-    result: "6 markets in 14 months",
-  },
-  {
-    type: "Growth strategy",
-    title: "From first visit to lasting habit",
-    summary: "Redesigned onboarding around customer intent, reducing friction while improving meaningful product adoption.",
-    result: "+42% activation",
-  },
+  { type: "Product transformation", title: "Reimagining everyday money management", summary: "Led the strategy and cross-functional operating model for a mobile banking experience serving 4.8 million customers.", result: "+31% monthly engagement" },
+  { type: "Market expansion", title: "A platform built for six new markets", summary: "Created a modular launch playbook that balanced local customer needs with a scalable global product foundation.", result: "6 markets in 14 months" },
+  { type: "Growth strategy", title: "From first visit to lasting habit", summary: "Redesigned onboarding around customer intent, reducing friction while improving meaningful product adoption.", result: "+42% activation" },
 ];
 
 export function PortfolioSection() {
@@ -30,6 +15,10 @@ export function PortfolioSection() {
         {projects.map((project, index) => (
           <article className={styles.projectCard} key={project.title}>
             <div className={`${styles.projectVisual} ${styles[`projectVisual${index + 1}`]}`}>
+              <div className={styles.projectMiniUi} aria-hidden="true">
+                <span /><span /><span />
+                <div><i /><i /><i /></div>
+              </div>
               <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <div className={styles.projectCopy}>

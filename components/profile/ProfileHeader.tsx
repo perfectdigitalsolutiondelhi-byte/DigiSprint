@@ -1,3 +1,4 @@
+﻿import Image from "next/image";
 import Link from "next/link";
 import styles from "@/app/demo-profile/demo-profile.module.css";
 import { ShareButtons } from "./ShareButtons";
@@ -24,8 +25,15 @@ export function ProfileHeader() {
         </div>
         <div className={styles.profileIntro}>
           <div className={styles.photoWrap}>
-            <div className={styles.profilePhoto} role="img" aria-label="Portrait placeholder for Ananya Mehta">
-              <span>AM</span>
+            <div className={styles.profilePhoto}>
+              <Image
+                className={styles.profilePhotoImage}
+                src="/profiles/ananya-mehta.jpg"
+                alt="Professional portrait of Ananya Mehta"
+                fill
+                priority
+                sizes="(max-width: 680px) 118px, 180px"
+              />
             </div>
             <span className={styles.availableDot} title="Available for select advisory projects" />
           </div>

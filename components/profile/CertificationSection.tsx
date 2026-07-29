@@ -1,9 +1,9 @@
-import styles from "@/app/demo-profile/demo-profile.module.css";
+﻿import styles from "@/app/demo-profile/demo-profile.module.css";
 
 const certifications = [
-  { name: "Certified Scrum Product Owner", issuer: "Scrum Alliance", year: "2023" },
-  { name: "Design Thinking for Innovation", issuer: "University of Virginia", year: "2021" },
-  { name: "Reforge Growth Series", issuer: "Reforge", year: "2019" },
+  { name: "Certified Scrum Product Owner", issuer: "Scrum Alliance", year: "2023", code: "CSPO" },
+  { name: "Design Thinking for Innovation", issuer: "University of Virginia", year: "2021", code: "DTI" },
+  { name: "Reforge Growth Series", issuer: "Reforge", year: "2019", code: "RGS" },
 ];
 
 export function CertificationSection() {
@@ -14,10 +14,16 @@ export function CertificationSection() {
       <div className={styles.compactGrid}>
         {certifications.map((item) => (
           <article className={styles.compactCard} key={item.name}>
-            <span className={styles.cardIcon} aria-hidden="true">✦</span>
+            <div className={styles.certificateTop}>
+              <span className={styles.certificateSeal} aria-hidden="true">{item.code}</span>
+              <span className={styles.verifiedCredential}><i aria-hidden="true">✓</i> Verified</span>
+            </div>
             <h3>{item.name}</h3>
             <p>{item.issuer}</p>
-            <span>{item.year}</span>
+            <div className={styles.certificateMeta}>
+              <span>Issued {item.year}</span>
+              <span aria-hidden="true">↗</span>
+            </div>
           </article>
         ))}
       </div>
