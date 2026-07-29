@@ -29,7 +29,7 @@ const planFeatures = [
 ];
 
 function ArrowIcon() {
-  return <span aria-hidden="true">â†—</span>;
+  return <span aria-hidden="true">↗</span>;
 }
 
 export default function Home() {
@@ -68,7 +68,7 @@ export default function Home() {
               Start your first sprint <ArrowIcon />
             </a>
             <a className="text-link" href="#features">
-              See how it works <span aria-hidden="true">â†“</span>
+              See how it works <span aria-hidden="true">↓</span>
             </a>
             <a className="text-link demo-link" href="/demo-profile">
               View Demo Profile <ArrowIcon />
@@ -100,13 +100,13 @@ export default function Home() {
             </div>
             <div className="task-list">
               <div className="task done">
-                <span>âœ“</span> Finalize messaging
+                <span>✓</span> Finalize messaging
               </div>
               <div className="task done">
-                <span>âœ“</span> Approve visual direction
+                <span>✓</span> Approve visual direction
               </div>
               <div className="task active">
-                <span>â€¢</span> Build responsive pages
+                <span>•</span> Build responsive pages
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function Home() {
             </div>
           </div>
           <div className="floating-card card-week">
-            <span className="spark" aria-hidden="true">âœ¦</span>
+            <span className="spark" aria-hidden="true">✦</span>
             <div><strong>Great week</strong><span>12 tasks moved</span></div>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function Home() {
             <article className="feature-card" key={feature.number}>
               <span className="feature-number">{feature.number}</span>
               <div className="feature-symbol" aria-hidden="true">
-                {feature.number === "01" ? "â—Ž" : feature.number === "02" ? "â—’" : "â†—"}
+                {feature.number === "01" ? "◎" : feature.number === "02" ? "◒" : "↗"}
               </div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
@@ -178,7 +178,7 @@ export default function Home() {
           <p>Bring your next idea. We&apos;ll help you move it forward.</p>
           <ul>
             {planFeatures.map((feature) => (
-              <li key={feature}><span aria-hidden="true">âœ“</span>{feature}</li>
+              <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>
             ))}
           </ul>
           <a className="button button-light" href="mailto:hello@digisprint.app?subject=Start%20with%20DigiSprint">
@@ -203,7 +203,7 @@ export default function Home() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>Â© 2026 DigiSprint</span>
+          <span>© 2026 DigiSprint</span>
           <span>Made with focus and a little optimism.</span>
         </div>
       </footer>

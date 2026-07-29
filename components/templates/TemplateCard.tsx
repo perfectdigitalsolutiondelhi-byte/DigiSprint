@@ -9,23 +9,29 @@ export type Template = {
   features: string[];
   monogram: string;
   theme: string;
+  layout: string;
 };
 
 export function TemplateCard({ template, index }: { template: Template; index: number }) {
   return (
     <article
-      className="template-card"
+      className={`template-card template-layout-${template.layout}`}
       style={{ "--template-delay": `${Math.min(index, 7) * 55}ms` } as React.CSSProperties}
     >
-      <div className={`template-mockup template-theme-${template.theme}`} aria-hidden="true">
+      <div className={`template-mockup template-theme-${template.theme} preview-layout-${template.layout}`} aria-hidden="true">
         <div className="mockup-browser">
           <div className="mockup-bar"><i /><i /><i /></div>
-          <div className="mockup-content">
+          <div className={`mockup-content preview-ui-${template.layout}`}>
             <div className="mockup-avatar">{template.monogram}</div>
             <span className="mockup-kicker">{template.category}</span>
             <strong>{template.name}</strong>
             <span className="mockup-line mockup-line-wide" />
             <span className="mockup-line" />
+            <div className="preview-special">
+              {template.features.map((feature, featureIndex) => (
+                <span key={feature}><i />{featureIndex === 0 && <b>{feature}</b>}</span>
+              ))}
+            </div>
             <div className="mockup-actions"><i /><i /></div>
           </div>
         </div>

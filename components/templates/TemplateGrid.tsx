@@ -15,6 +15,7 @@ const templates: Template[] = [
     features: ["Service packages", "Case-study highlights", "Consultation CTA"],
     monogram: "BC",
     theme: "blue",
+    layout: "consultant",
   },
   {
     name: "Lawyer",
@@ -24,6 +25,7 @@ const templates: Template[] = [
     features: ["Practice areas", "Credentials", "Appointment links"],
     monogram: "LW",
     theme: "indigo",
+    layout: "lawyer",
   },
   {
     name: "Doctor",
@@ -33,6 +35,7 @@ const templates: Template[] = [
     features: ["Specializations", "Clinic hours", "Patient contact"],
     monogram: "DR",
     theme: "cyan",
+    layout: "doctor",
   },
   {
     name: "CA",
@@ -42,6 +45,7 @@ const templates: Template[] = [
     features: ["Advisory services", "Certifications", "Enquiry CTA"],
     monogram: "CA",
     theme: "violet",
+    layout: "finance",
   },
   {
     name: "Teacher",
@@ -51,6 +55,7 @@ const templates: Template[] = [
     features: ["Subject expertise", "Student results", "Class enquiries"],
     monogram: "TE",
     theme: "sky",
+    layout: "teacher",
   },
   {
     name: "Freelancer",
@@ -60,6 +65,7 @@ const templates: Template[] = [
     features: ["Work portfolio", "Skill stack", "Availability status"],
     monogram: "FR",
     theme: "purple",
+    layout: "freelancer",
   },
   {
     name: "Startup Founder",
@@ -69,6 +75,7 @@ const templates: Template[] = [
     features: ["Company story", "Milestones", "Press and contact"],
     monogram: "SF",
     theme: "electric",
+    layout: "founder",
   },
   {
     name: "Photographer",
@@ -78,6 +85,7 @@ const templates: Template[] = [
     features: ["Gallery showcase", "Shoot categories", "Booking CTA"],
     monogram: "PH",
     theme: "magenta",
+    layout: "photographer",
   },
   {
     name: "Influencer",
@@ -87,6 +95,7 @@ const templates: Template[] = [
     features: ["Audience metrics", "Brand work", "Social links"],
     monogram: "IN",
     theme: "aurora",
+    layout: "creator",
   },
   {
     name: "Restaurant",
@@ -96,6 +105,7 @@ const templates: Template[] = [
     features: ["Menu preview", "Opening hours", "Maps and booking"],
     monogram: "RS",
     theme: "royal",
+    layout: "restaurant",
   },
   {
     name: "Real Estate",
@@ -105,6 +115,7 @@ const templates: Template[] = [
     features: ["Featured listings", "Local expertise", "Site-visit CTA"],
     monogram: "RE",
     theme: "ocean",
+    layout: "property",
   },
   {
     name: "Shop Owner",
@@ -114,6 +125,7 @@ const templates: Template[] = [
     features: ["Product categories", "Business hours", "WhatsApp orders"],
     monogram: "SO",
     theme: "nebula",
+    layout: "shop",
   },
 ];
 
