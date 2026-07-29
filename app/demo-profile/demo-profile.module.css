@@ -108,3 +108,12 @@
 :global(html[data-appearance="light"]) .projectVisual{background:#17171D}:global(html[data-appearance="light"]) .profileHeader{box-shadow:0 8px 30px rgba(24,24,27,.08)}
 @media(max-width:680px){.profileNav{grid-template-columns:1fr auto auto}.backLink{font-size:0}.backLink span{font-size:16px}.intro,.biographyCopy p,.timelineItem div>p:last-child,.projectCopy>p:not(.projectType),.serviceList p,.testimonialGrid blockquote,.contactCopy>p:not(.kicker),.serviceNote p{font-size:15px}}
 @media(max-width:480px){.intro,.biographyCopy p,.timelineItem div>p:last-child,.projectCopy>p:not(.projectType),.serviceList p,.testimonialGrid blockquote,.contactCopy>p:not(.kicker),.serviceNote p{text-align:left;hyphens:none}.profileNav{gap:6px}}
+
+/* Verified UI fixes — QR alignment and skill visibility */
+.qrBlock{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-self:center;gap:14px;text-align:center}
+.qrBlock .qrPlaceholder{margin:0 auto;flex:0 0 auto}
+.qrBlock p{width:100%;max-width:150px;margin:0;text-align:center;line-height:1.35}
+.skillList li{color:#D4D4D8;opacity:1}.skillList li span{color:var(--profile-accent-text);opacity:1}.skillList li{border-color:var(--profile-line)}
+:global(html[data-appearance="light"]) .skillList li{color:#374151}:global(html[data-appearance="light"]) .skillList li span{color:var(--profile-accent-text)}:global(html[data-appearance="light"]) .skillList li{border-color:#D4D4D8}
+:global(html[data-appearance="dark"]) .skillList li,:global(html[data-appearance="medium"]) .skillList li{color:#D4D4D8}
+@media(max-width:680px){.qrBlock{display:flex;flex-direction:column;align-items:center;justify-content:center;justify-self:center;gap:12px;text-align:center}.qrBlock p{max-width:110px;margin:0;text-align:center}}
