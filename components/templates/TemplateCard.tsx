@@ -1,4 +1,4 @@
-import { TemplateBadge } from "./TemplateBadge";
+﻿import { TemplateBadge } from "./TemplateBadge";
 import type { TemplateCategory } from "./CategoryFilter";
 
 export type Template = {
@@ -12,33 +12,42 @@ export type Template = {
   layout: string;
 };
 
+const previewDetails: Record<string, { label: string; action: string }> = {
+  consultant: { label: "Advisory dashboard", action: "Book strategy call" },
+  lawyer: { label: "Legal counsel", action: "Request consultation" },
+  doctor: { label: "Clinic profile", action: "Book appointment" },
+  finance: { label: "Financial advisory", action: "View tax services" },
+  teacher: { label: "Learning studio", action: "Explore courses" },
+  freelancer: { label: "Portfolio available", action: "View selected work" },
+  founder: { label: "Founder profile", action: "Company highlights" },
+  photographer: { label: "Visual stories", action: "Open gallery" },
+  creator: { label: "Creator profile", action: "View collaborations" },
+  restaurant: { label: "Open for dining", action: "Reserve a table" },
+  property: { label: "Featured property", action: "Schedule a visit" },
+  shop: { label: "New collection", action: "Browse catalogue" },
+};
+
 export function TemplateCard({ template, index }: { template: Template; index: number }) {
+  const preview = previewDetails[template.layout];
+
   return (
     <article
       className={`template-card template-layout-${template.layout}`}
       style={{ "--template-delay": `${Math.min(index, 7) * 55}ms` } as React.CSSProperties}
     >
-      <div className={`template-mockup template-theme-${template.theme} preview-layout-${template.layout}`} aria-hidden="true">
-        <div className="mockup-browser">
-          <div className="mockup-bar"><i /><i /><i /></div>
-          <div className={`mockup-content preview-ui-${template.layout}`}>
-            <div className="mockup-avatar">{template.monogram}</div>
-            <span className="mockup-kicker">{template.category}</span>
-            <strong>{template.name}</strong>
-            <span className="mockup-line mockup-line-wide" />
-            <span className="mockup-line" />
-            <div className="preview-special">
-              {template.features.map((feature, featureIndex) => (
-                <span key={feature}><i />{featureIndex === 0 && <b>{feature}</b>}</span>
-              ))}
-            </div>
-            <div className="mockup-actions"><i /><i /></div>
-          </div>
+      <div className={`template-mockup profession-preview preview-layout-${template.layout}`} aria-hidden="true">
+        <div className={`profession-art profession-art-${template.layout}`} />
+        <div className="profession-image-shade" />
+        <div className="profession-preview-top">
+          <span className={`profession-icon profession-icon-${template.layout}`} />
+          <span>{preview.label}</span>
         </div>
-        <div className="mockup-phone">
-          <span className="mockup-notch" />
-          <div className="phone-avatar">{template.monogram}</div>
-          <i /><i /><i />
+        <div className="profession-preview-bottom">
+          <div>
+            <small>{template.category}</small>
+            <strong>{template.name}</strong>
+          </div>
+          <span>{preview.action}</span>
         </div>
         <span className="template-index">{String(index + 1).padStart(2, "0")}</span>
       </div>
