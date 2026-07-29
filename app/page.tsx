@@ -21,6 +21,15 @@ export default function Home() {
           <a href="#templates">Templates</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a>
           <a className="nav-cta" href="#templates">Explore templates <ArrowIcon /></a>
         </nav>
+        <details className="mobile-nav">
+          <summary aria-label="Open navigation menu"><span /><span /></summary>
+          <div>
+            <a href="#templates">Templates</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="/demo-profile">View demo</a>
+          </div>
+        </details>
       </header>
 
       <section className="v6-hero" aria-labelledby="hero-title">
@@ -113,8 +122,8 @@ export default function Home() {
         <div className="v6-footer-main">
           <div className="v6-footer-brand"><a className="brand" href="#" aria-label="DigiSprint home"><span className="brand-mark" aria-hidden="true">D</span>DigiSprint</a><p>Premium digital profiles for modern professionals and businesses.</p></div>
           <div><strong>Product</strong><a href="#templates">Templates</a><a href="/demo-profile">Demo Profile</a><a href="/demo-card">Digital Card</a></div>
-          <div><strong>Resources</strong><a href="#how-it-works">How It Works</a><a href="#pricing">Pricing</a><a href="#" aria-label="Contact DigiSprint">Contact</a></div>
-          <div><strong>Legal</strong><a href="#" aria-label="Privacy policy placeholder">Privacy</a><a href="#" aria-label="Terms placeholder">Terms</a></div>
+          <div><strong>Professions</strong><a href="#templates">Consultants</a><a href="#templates">Healthcare</a><a href="#templates">Creators</a></div>
+          <div><strong>Legal &amp; social</strong><a href="#" aria-label="Privacy policy placeholder">Privacy</a><a href="#" aria-label="Terms placeholder">Terms</a><a href="#" aria-label="DigiSprint on LinkedIn">LinkedIn</a></div>
         </div>
         <div className="v6-footer-bottom"><span>© 2026 DigiSprint</span><span>Professional identity, beautifully presented.</span></div>
       </footer>
