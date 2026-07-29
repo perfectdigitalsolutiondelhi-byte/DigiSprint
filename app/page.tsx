@@ -71,6 +71,9 @@ export default function Home() {
             <a className="text-link demo-link" href="/demo-profile">
               View Demo Profile <ArrowIcon />
             </a>
+            <a className="text-link demo-link" href="/demo-card">
+              View Digital Card Demo <ArrowIcon />
+            </a>
           </div>
           <p className="hero-note">Free to start. No credit card needed.</p>
         </div>
