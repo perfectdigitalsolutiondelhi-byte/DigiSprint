@@ -50,10 +50,6 @@ export function TemplateCard({ template, index }: { template: Template; index: n
         </div>
         <h3>{template.name}</h3>
         <p>{template.description}</p>
-        <div className="suitable-for">
-          <span>Suitable for</span>
-          <strong>{template.suitableFor}</strong>
-        </div>
         <ul aria-label={`${template.name} feature preview`}>
           {template.features.map((feature) => (
             <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>
