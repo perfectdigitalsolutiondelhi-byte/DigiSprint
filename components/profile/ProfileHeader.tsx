@@ -1,8 +1,9 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "@/app/demo-profile/demo-profile.module.css";
 import { ShareButtons } from "./ShareButtons";
 import { VerifiedBadge } from "./VerifiedBadge";
+import { ThemeSettings } from "../theme/ThemeProvider";
 
 export function ProfileHeader() {
   return (
@@ -15,6 +16,7 @@ export function ProfileHeader() {
         <Link className={styles.backLink} href="/">
           Back to DigiSprint <span aria-hidden="true">↗</span>
         </Link>
+        <ThemeSettings />
       </nav>
 
       <header className={styles.profileHeader}>

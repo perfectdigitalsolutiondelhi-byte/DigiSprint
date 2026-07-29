@@ -7,6 +7,7 @@ import { CTASection } from "./CTASection";
 import { QRSection } from "./QRSection";
 import { ShareButtons } from "./ShareButtons";
 import { SocialIcons } from "./SocialIcons";
+import { ThemeSettings } from "../theme/ThemeProvider";
 
 export function BusinessCard() {
   return (
@@ -19,6 +20,7 @@ export function BusinessCard() {
         <Link className={styles.backLink} href="/">
           Back to DigiSprint <span aria-hidden="true">↗</span>
         </Link>
+        <ThemeSettings />
       </nav>
 
       <div className={styles.shell}>

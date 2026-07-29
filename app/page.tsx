@@ -1,4 +1,5 @@
 import { TemplateGrid } from "../components/templates/TemplateGrid";
+import { ThemeSettings } from "../components/theme/ThemeProvider";
 
 const steps = [
   { number: "01", icon: "layers", title: "Choose a Template", description: "Select a design suited to your profession or business." },
@@ -21,6 +22,7 @@ export default function Home() {
           <a href="#templates">Templates</a><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a>
           <a className="nav-cta" href="#templates">Explore templates <ArrowIcon /></a>
         </nav>
+        <ThemeSettings />
         <details className="mobile-nav">
           <summary aria-label="Open navigation menu"><span /><span /></summary>
           <div>
