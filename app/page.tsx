@@ -1,4 +1,6 @@
-﻿const features = [
+﻿import { TemplateGrid } from "../components/templates/TemplateGrid";
+
+const features = [
   {
     number: "01",
     title: "Plan with clarity",
@@ -121,6 +123,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TemplateGrid />
 
       <section className="trust-strip" aria-label="DigiSprint product principles">
         <span>Simple by design</span><i />
