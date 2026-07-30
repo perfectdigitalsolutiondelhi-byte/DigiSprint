@@ -1,12 +1,12 @@
-﻿# DigiSprint product architecture
+# DigiSprint product architecture
 
 DigiSprint is an AI-powered Digital Marketing Assistant for Indian small businesses.
 
 ## Current release boundary
 
-Version 1.0 establishes the product direction, public marketing surface, responsive product shell, dashboard preview, plan architecture, environment contract and Supabase-ready foundation schema.
+Versions 1.0-1.2 establish the product direction, authenticated Supabase session architecture, responsive product shell and guided business setup with atomic workspace provisioning.
 
-Authentication, live database access, AI requests, uploads, payments and scheduled jobs are intentionally deferred to later versions.
+AI requests, uploads, payments and scheduled jobs remain intentionally deferred to later versions.
 
 ## Canonical source layout
 
@@ -24,11 +24,13 @@ The active application uses the root `app/` and `components/` directories. The o
 
 ## Route ownership
 
-- `/` — public marketing homepage
-- `/plan` — plan architecture preview
-- `/dashboard` — Version 1.0 product-shell preview
-- `/demo-profile` and `/demo-card` — legacy rollback routes pending retirement
+- `/` - public marketing homepage
+- `/plan` - plan architecture preview
+- `/login` and `/signup` - public authentication entry points
+- `/setup` - protected three-step business onboarding
+- `/dashboard` - authenticated product workspace
+- `/demo-profile` and `/demo-card` - legacy rollback routes pending retirement
 
-## Next release
+## Current release
 
-Version 1.1 introduces Supabase clients, authentication routes, session middleware and profile provisioning. The Version 1.0 dashboard must remain read-only until that work is complete.
+Version 1.2 adds transactional business, brand and marketing-preference setup. The next release can build the live dashboard data layer without changing the onboarding contract.
