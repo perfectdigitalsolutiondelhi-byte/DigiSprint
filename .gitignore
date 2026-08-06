@@ -7,4 +7,6 @@ build
 .env*
 !.env.example
 .vercel
+supabase/.temp/
+.supabase/.temp/
 *.tsbuildinfo
