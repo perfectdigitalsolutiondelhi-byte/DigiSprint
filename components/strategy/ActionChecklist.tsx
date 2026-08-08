@@ -1,0 +1,2 @@
+import type { MarketingStrategyOutput } from "../../lib/marketing-strategy/types";
+export function ActionChecklist({ data }: { data: MarketingStrategyOutput["actionChecklist"] }) { return <section className="strategy-section"><span className="strategy-label">Execution</span><h2>Action checklist</h2><ul className="action-list">{data.map(x=><li key={x.action}><span>✓</span><div><h3>{x.action}</h3><p>{x.outcome}</p><small>{x.timeframe}</small></div></li>)}</ul></section> }

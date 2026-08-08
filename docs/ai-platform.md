@@ -152,3 +152,11 @@ Immutable telemetry containing input, output and total tokens; estimated input, 
 ## Testing strategy
 
 Validation covers linting, strict TypeScript compilation, production compilation and whitespace errors. The provider test double enables later unit coverage for prompt rendering, output validation, provider failures and service orchestration without external calls. Database integration tests must apply migrations twice, verify RLS across two businesses, exercise successful and failed lifecycle transitions, confirm idempotency and assert all token/cost totals.
+
+## Version 1.5 consumer: Marketing Strategy Engine
+
+The first production consumer follows the unchanged AI Core boundary: authenticated feature action → `runAIRequest()` → prompt registry → business context → provider registry → structured validation → generated content and usage telemetry.
+
+Feature modules must not import OpenAI, read provider secrets, or call provider APIs. New consumers register a versioned prompt, define bounded input/output schemas, use server-derived business identity, preserve idempotency, and store successful structured results through the generated-content system.
+
+The strategy consumer adds deterministic business-context caching without changing the core schema. Future consumers should use the same extension contract. Reserved families are `daily_post`, `festival_post`, `seo_audit`, `website_copy`, `email_campaign`, `ad_copy`, `social_calendar`, `resume_builder`, and `mini_profile`; none are implemented in Version 1.5.

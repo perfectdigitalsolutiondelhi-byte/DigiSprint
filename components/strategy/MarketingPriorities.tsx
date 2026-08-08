@@ -1,0 +1,2 @@
+import type { MarketingStrategyOutput } from "../../lib/marketing-strategy/types";
+export function MarketingPriorities({ data }: { data: MarketingStrategyOutput["marketingPriorities"] }) { return <section className="strategy-section"><span className="strategy-label">Focus</span><h2>Marketing priorities</h2><ol className="priority-list">{data.map(x=><li key={x.rank}><b>{x.rank}</b><div><h3>{x.priority}</h3><p>{x.reason}</p><small>{x.timeframe}</small></div></li>)}</ol></section> }

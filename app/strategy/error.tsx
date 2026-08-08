@@ -1,0 +1,1 @@
+"use client";export default function StrategyError({reset}:{reset:()=>void}){return <main className="strategy-route-state"><h1>Strategy workspace is unavailable.</h1><p>Your saved work is safe. Try loading the page again.</p><button onClick={reset}>Try again</button></main>}

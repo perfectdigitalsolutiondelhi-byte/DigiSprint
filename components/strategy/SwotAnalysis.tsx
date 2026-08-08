@@ -1,0 +1,2 @@
+import type { MarketingStrategyOutput } from "../../lib/marketing-strategy/types";import { StrategyList } from "./StrategyList";
+export function SwotAnalysis({ data }: { data: MarketingStrategyOutput["swot"] }) { return <section className="strategy-section"><span className="strategy-label">Analysis</span><h2>SWOT</h2><div className="strategy-grid-four">{Object.entries(data).map(([key,items])=><article key={key}><h3>{key}</h3><StrategyList items={items}/></article>)}</div></section> }

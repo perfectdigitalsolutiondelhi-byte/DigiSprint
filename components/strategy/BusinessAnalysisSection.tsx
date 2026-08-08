@@ -1,0 +1,3 @@
+import type { MarketingStrategyOutput } from "../../lib/marketing-strategy/types";
+import { StrategyList } from "./StrategyList";
+export function BusinessAnalysisSection({ data }: { data: MarketingStrategyOutput }) { return <section className="strategy-section"><span className="strategy-label">Foundation</span><h2>Executive summary</h2><p>{data.executiveSummary}</p><div className="strategy-columns"><article><h3>Business position</h3><p>{data.businessAnalysis.position}</p></article><article><h3>Strengths to leverage</h3><StrategyList items={data.businessAnalysis.strengthsToLeverage}/></article><article><h3>Growth barriers</h3><StrategyList items={data.businessAnalysis.growthBarriers}/></article></div></section> }

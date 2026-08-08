@@ -1,0 +1,2 @@
+import type { MarketingStrategyOutput } from "../../lib/marketing-strategy/types";import { StrategyList } from "./StrategyList";
+export function SocialStrategy({ data }: { data: MarketingStrategyOutput["platformStrategies"] }) { return <section className="strategy-section"><span className="strategy-label">Channels</span><h2>Platform strategies</h2><div className="strategy-card-grid">{data.map(x=><article key={x.platform}><small>{x.cadence}</small><h3>{x.platform}</h3><p>{x.objective}</p><StrategyList items={x.contentMix}/></article>)}</div></section> }

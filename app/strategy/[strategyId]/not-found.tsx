@@ -1,0 +1,1 @@
+import Link from "next/link";export default function StrategyNotFound(){return <main className="strategy-route-state"><h1>Strategy not found.</h1><p>It may not exist or may belong to another workspace.</p><Link href="/strategy">Return to strategy history</Link></main>}
