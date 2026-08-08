@@ -16,7 +16,16 @@ const previewWorkspace: DashboardWorkspace = { configured:false,userName:"DigiSp
 export async function loadDashboard(): Promise<DashboardWorkspace> {
   if (!isSupabaseConfigured()) return previewWorkspace;
   const supabase=await createClient();const {data:{user}}=await supabase.auth.getUser();if(!user)redirect("/login?next=/dashboard");
-  const {data:membership}=await supabase.from("business_members").select("business_id").eq("user_id",user.id).eq("is_active",true).limit(1).maybeSingle();if(!membership)redirect("/setup");
+  const {
+  data: membership,
+  error: membershipError,
+} = await supabase
+.from("business_members").select("business_id").eq("user_id",user.id).eq("is_active",true).limit(1).maybeSingle();console.log("[Dashboard Membership]", {
+  hasMembership: !!membership,
+  errorCode: membershipError?.code ?? null,
+  errorMessage: membershipError?.message ?? null,
+  userId: user.id.slice(-8),
+});if(!membership)redirect("/setup");
   const businessId=membership.business_id;
   const [businessResult,brandResult,preferencesResult,postsResult,countResult,readyResult,strategyResult,strategyCount]=await Promise.all([
     supabase.from("businesses").select("id, name, industry, city, description").eq("id",businessId).single(),
