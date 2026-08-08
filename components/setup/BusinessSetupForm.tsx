@@ -1,7 +1,10 @@
 "use client";
 
 import { useActionState, useRef, useState } from "react";
-import { completeBusinessSetup, initialState } from "../../app/setup/actions";
+import { completeBusinessSetup } from "../../app/setup/actions";
+import type { SetupState } from "../../app/setup/actions";
+
+const initialState: SetupState = { error: "" };
 
 const industries = ["Restaurant & Food", "Retail & Shop", "Professional Services", "Health & Wellness", "Education", "Beauty & Lifestyle", "Real Estate", "Other"];
 const tones = [

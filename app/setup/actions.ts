@@ -5,7 +5,6 @@ import { createClient } from "../../lib/supabase/server";
 import { isSupabaseConfigured } from "../../lib/supabase/config";
 
 export type SetupState = { error: string };
-export const initialState: SetupState = { error: "" };
 
 function values(formData: FormData, name: string) {
   return formData.getAll(name).map(String).filter(Boolean);
