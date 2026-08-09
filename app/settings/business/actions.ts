@@ -48,6 +48,7 @@ export async function updateBusinessSettings(_state: BusinessSettingsState, form
       business_state: input.state || null,
       business_country: input.country,
     });
+    if (error?.code === "22023") return initialError({ code: "INVALID_INPUT", message: error.message });
     if (error?.code === "42501") return initialError({ code: "FORBIDDEN", message: "You do not have permission to update this workspace." });
     if (error?.code === "P0002") return initialError({ code: "BUSINESS_NOT_FOUND", message: "The business workspace could not be found." });
     if (error) throw new AIPlatformError("STORAGE_ERROR", "Business settings could not be saved.", error);
