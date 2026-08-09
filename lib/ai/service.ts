@@ -13,6 +13,8 @@ import { featureKeySchema, idempotencyKeySchema } from "./schemas";
 import { loadAISettings } from "./settings";
 import { validateCostConfiguration } from "./usage/cost-estimator";
 import type { AIRequest, AIResult } from "./types";
+import { createStrategyFingerprint } from "../marketing-strategy/cache";
+import type { MarketingStrategyInput } from "../marketing-strategy/types";
 
 export async function runAIRequest<TInput, TOutput>(request: AIRequest<TInput>): Promise<AIResult<TOutput>> {
   let jobId: string | null = null;
@@ -29,6 +31,9 @@ export async function runAIRequest<TInput, TOutput>(request: AIRequest<TInput>):
     const promptContext = settings.includeBusinessContext ? context : { ...context, description: "", audience: "", platforms: [], goals: [] };
     const prompt = getPrompt(request.promptKey);
     const rendered = renderPrompt(prompt, request.input, promptContext);
+    const requestFingerprint = request.featureKey === "marketing_strategy"
+      ? createStrategyFingerprint({ context: promptContext, input: rendered.parsedInput as MarketingStrategyInput, promptKey: prompt.key, promptVersion: prompt.version, modelProfile: settings.modelProfile || prompt.modelProfile })
+      : null;
     const { provider, model, timeoutMs } = resolveProvider(settings.modelProfile || prompt.modelProfile);
     validateCostConfiguration();
     jobId = await startAIJob(supabase, {
@@ -43,7 +48,8 @@ export async function runAIRequest<TInput, TOutput>(request: AIRequest<TInput>):
     const output = prompt.outputSchema.parse(providerResult.data) as TOutput;
     const contentId = await completeAIJob(supabase, {
       jobId, featureKey: request.featureKey, promptKey: prompt.key, promptVersion: prompt.version,
-      language: settings.defaultLanguage || context.languages[0] || "en", output, result: providerResult, durationMs: Date.now() - startedAt,
+      language: request.language, requestInput: rendered.parsedInput, requestFingerprint,
+      output, result: providerResult, durationMs: Date.now() - startedAt,
     });
     return { jobId, contentId, output, usage: providerResult.usage };
   } catch (error) {

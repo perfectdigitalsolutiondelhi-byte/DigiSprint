@@ -9,7 +9,9 @@ export async function loadBusinessContext(supabase: SupabaseClient, businessId: 
     supabase.from("brand_kits").select("tone,language_preferences").eq("business_id", businessId).maybeSingle(),
     supabase.from("content_preferences").select("platforms,content_goals,target_audience,posts_per_week").eq("business_id", businessId).maybeSingle(),
   ]);
-  if (businessResult.error || !businessResult.data) throw new AIPlatformError("BUSINESS_NOT_FOUND", "The business context could not be loaded.");
+  if (businessResult.error) throw new AIPlatformError("STORAGE_ERROR", "The business context could not be loaded.", businessResult.error);
+  if (!businessResult.data) throw new AIPlatformError("BUSINESS_NOT_FOUND", "The business context could not be loaded.");
+  if (brandResult.error || preferencesResult.error) throw new AIPlatformError("STORAGE_ERROR", "The supporting business context could not be loaded.", brandResult.error || preferencesResult.error);
   const business = businessResult.data;
   return businessContextSchema.parse({
     businessId, name: business.name, industry: business.industry || "Small business",

@@ -50,6 +50,7 @@ export type AIRequest<TInput> = {
   featureKey: string;
   promptKey: string;
   input: TInput;
+  language: string;
   idempotencyKey: string;
 };
 
