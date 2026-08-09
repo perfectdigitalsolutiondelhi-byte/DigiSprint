@@ -11,6 +11,7 @@ export type AIErrorCode =
   | "PROVIDER_ERROR"
   | "INVALID_OUTPUT"
   | "STORAGE_ERROR"
+  | "CONFLICT"
   | "DUPLICATE_REQUEST";
 
 export class AIPlatformError extends Error {

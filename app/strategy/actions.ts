@@ -39,11 +39,10 @@ export async function acceptMarketingStrategy(formData: FormData) {
   const parsed = strategyActionSchema.safeParse({ strategyId: formData.get("strategyId") });
   if (!parsed.success) return;
   const { supabase, business } = await requireStrategyWorkspace(`/strategy/${parsed.data.strategyId}`);
-  const strategy = await loadStrategyById(supabase, business.id, parsed.data.strategyId);
-  if (!strategy) return;
-  const { error } = await supabase.rpc("accept_marketing_strategy", { target_business_id: business.id, target_strategy_id: strategy.id });
+  const { error } = await supabase.rpc("accept_marketing_strategy", { target_business_id: business.id, target_strategy_id: parsed.data.strategyId });
+  if (error?.code === "P0002") throw new AIPlatformError("CONFLICT", "This strategy is no longer available to accept.", error);
   if (error) throw new AIPlatformError("STORAGE_ERROR", "Unable to accept this strategy.", error);
-  redirect(`/strategy/${strategy.id}?accepted=1`);
+  redirect(`/strategy/${parsed.data.strategyId}?accepted=1`);
 }
 export async function regenerateMarketingStrategy(formData: FormData) {
   const parsed = strategyActionSchema.safeParse({ strategyId: formData.get("strategyId") });
