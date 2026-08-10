@@ -1,0 +1,1 @@
+import Link from "next/link"; export default function NotFound() { return <main className="dashboard-content"><h1>Weekly strategy not found</h1><p>This workspace is unavailable or does not belong to your business.</p><Link href="/strategy">Back to strategies</Link></main>; }
