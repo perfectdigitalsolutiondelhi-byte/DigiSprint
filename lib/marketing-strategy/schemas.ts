@@ -31,3 +31,47 @@ export const marketingStrategyOutputSchema = z.object({
   if (new Set(days).size !== 30 || days.some((day, index) => day !== index + 1)) context.addIssue({ code: "custom", path: ["contentCalendar"], message: "Calendar days must be unique and sequential from 1 to 30." });
 });
 export const strategyActionSchema = z.object({ strategyId: z.string().uuid() }).strict();
+const outputShape = marketingStrategyOutputSchema.shape;
+export const marketingStrategyFoundationSchema = z.object({
+  title: outputShape.title,
+  executiveSummary: outputShape.executiveSummary,
+  businessAnalysis: outputShape.businessAnalysis,
+  swot: outputShape.swot,
+  targetAudience: outputShape.targetAudience,
+  customerPersonas: outputShape.customerPersonas,
+  competitorResearchFramework: outputShape.competitorResearchFramework,
+}).strict();
+export const marketingStrategyExecutionSchema = z.object({
+  seoStrategy: outputShape.seoStrategy,
+  keywordStrategy: outputShape.keywordStrategy,
+  localSeo: outputShape.localSeo,
+  platformStrategies: outputShape.platformStrategies,
+  advertisingRecommendations: outputShape.advertisingRecommendations,
+  budgetAllocation: outputShape.budgetAllocation,
+  marketingPriorities: outputShape.marketingPriorities,
+  actionChecklist: outputShape.actionChecklist,
+  confidenceAndAssumptions: outputShape.confidenceAndAssumptions,
+  limitations: outputShape.limitations,
+  metadata: outputShape.metadata,
+}).strict();
+export const marketingStrategyExecutiveSchema = z.object({
+  ...marketingStrategyFoundationSchema.shape,
+  ...marketingStrategyExecutionSchema.shape,
+}).strict();
+export const marketingStrategyExecutionInputSchema = z.object({
+  strategyRequest: marketingStrategyInputSchema,
+  foundation: marketingStrategyFoundationSchema,
+}).strict();
+export const marketingStrategyCalendarSchema = z.object({
+  contentCalendar: outputShape.contentCalendar,
+}).strict();
+export const marketingStrategyCalendarInputSchema = z.object({
+  strategyRequest: marketingStrategyInputSchema,
+  executiveContext: z.object({
+    title: marketingStrategyExecutiveSchema.shape.title,
+    executiveSummary: marketingStrategyExecutiveSchema.shape.executiveSummary,
+    targetAudience: marketingStrategyExecutiveSchema.shape.targetAudience,
+    platformStrategies: marketingStrategyExecutiveSchema.shape.platformStrategies,
+    marketingPriorities: marketingStrategyExecutiveSchema.shape.marketingPriorities,
+  }).strict(),
+}).strict();

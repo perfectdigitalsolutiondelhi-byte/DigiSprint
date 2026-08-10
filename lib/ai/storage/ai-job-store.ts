@@ -18,8 +18,6 @@ export async function startAIJob(supabase: SupabaseClient, values: { businessId:
 }
 
 export async function failAIJob(supabase: SupabaseClient, jobId: string, errorCode: string, durationMs: number) {
-  const payload = { target_job_id: jobId, target_error_code: errorCode, target_duration_ms: durationMs };
-  console.error("[ai.fail_ai_job]", payload);
-  const { error } = await supabase.rpc("fail_ai_job", payload);
+  const { error } = await supabase.rpc("fail_ai_job", { target_job_id: jobId, target_error_code: errorCode, target_duration_ms: durationMs });
   if (error) throw new AIPlatformError("STORAGE_ERROR", "The failed AI job could not be recorded.", error);
 }
