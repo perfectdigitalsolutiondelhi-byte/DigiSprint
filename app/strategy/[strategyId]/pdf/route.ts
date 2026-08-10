@@ -14,6 +14,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ stra
   const strategy = await loadStrategyReview(supabase, business.id, strategyId, selectedRevision);
   if (!strategy) notFound();
   const bytes = await buildStrategyPdf(strategy);
-  const filename = `strategy-v${strategy.version}-revision-${strategy.selectedRevision ?? strategy.revisions.at(-1)?.revisionNumber ?? 0}.pdf`;
+  const filename = `strategy-v${strategy.version}-revision-${strategy.selectedRevision ?? strategy.latestRevisionNumber}.pdf`;
   return new Response(new Blob([bytes as Uint8Array<ArrayBuffer>]), { headers: { "Content-Type": "application/pdf", "Content-Disposition": `attachment; filename="${filename}"`, "Cache-Control": "private, no-store" } });
 }

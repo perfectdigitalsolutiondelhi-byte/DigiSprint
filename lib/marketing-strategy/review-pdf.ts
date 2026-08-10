@@ -52,7 +52,7 @@ export async function buildStrategyPdf(strategy: StrategyReview) {
   drawLine("DIGISPRINT STRATEGY REVIEW", 9, rgb(0.25,0.35,0.8));
   y -= 8; drawLine(strategy.title, 22, rgb(0.06,0.08,0.14)); y -= 4;
   drawLine(`Strategy V${strategy.version} | Status: ${strategy.status} | Prompt v${strategy.promptVersion}`, 9);
-  drawLine(`Generated: ${new Date(strategy.createdAt).toLocaleDateString("en-IN")} | Revision: ${strategy.selectedRevision ?? strategy.revisions.at(-1)?.revisionNumber ?? 0}`, 9);
+  drawLine(`Generated: ${new Date(strategy.createdAt).toLocaleDateString("en-IN")} | Revision: ${strategy.selectedRevision ?? strategy.latestRevisionNumber}`, 9);
   y -= 16;
   for (const [section,value] of Object.entries(strategy.document) as [ReviewSectionKey,unknown][]) {
     ensure(50); drawLine(labels[section], 15, rgb(0.08,0.13,0.28)); y -= 4;

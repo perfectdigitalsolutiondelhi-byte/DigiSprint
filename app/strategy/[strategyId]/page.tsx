@@ -10,15 +10,17 @@ export const dynamic = "force-dynamic";
 
 export default async function StrategyDetailPage({ params, searchParams }: {
   params: Promise<{ strategyId: string }>;
-  searchParams: Promise<{ revision?: string }>;
+  searchParams: Promise<{ revision?: string; revisionPage?: string }>;
 }) {
   const { strategyId } = await params;
   const query = await searchParams;
   const selectedRevision = query.revision === undefined ? undefined : Number(query.revision);
+  const revisionPage = query.revisionPage === undefined ? 1 : Number(query.revisionPage);
   if (selectedRevision !== undefined && (!Number.isInteger(selectedRevision) || selectedRevision < 0)) notFound();
+  if (!Number.isInteger(revisionPage) || revisionPage < 1) notFound();
 
   const { supabase, user, business } = await requireStrategyOwnerWorkspace(`/strategy/${strategyId}`);
-  const strategy = await loadStrategyReview(supabase, business.id, strategyId, selectedRevision);
+  const strategy = await loadStrategyReview(supabase, business.id, strategyId, selectedRevision, revisionPage);
   if (!strategy) notFound();
   const editorName = typeof user.user_metadata.full_name === "string" ? user.user_metadata.full_name : user.email ?? "Workspace owner";
 

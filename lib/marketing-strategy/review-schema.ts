@@ -43,6 +43,7 @@ export const revisionActionSchema = z.object({
   strategyId: z.uuid(),
   section: reviewSectionKeySchema,
   content: z.string().max(100_000),
+  expectedRevisionNumber: z.coerce.number().int().min(0),
 }).strict();
 export const reviewStatusActionSchema = z.object({
   strategyId: z.uuid(),
