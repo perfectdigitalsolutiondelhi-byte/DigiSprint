@@ -58,9 +58,25 @@ export const marketingStrategyExecutiveSchema = z.object({
   ...marketingStrategyFoundationSchema.shape,
   ...marketingStrategyExecutionSchema.shape,
 }).strict();
+const handoffLabel = z.string().trim().min(1).max(160);
 export const marketingStrategyExecutionInputSchema = z.object({
   strategyRequest: marketingStrategyInputSchema,
-  foundation: marketingStrategyFoundationSchema,
+  foundation: z.object({
+    title: marketingStrategyFoundationSchema.shape.title,
+    executiveSummary: z.string().trim().min(1).max(900),
+    position: z.string().trim().min(1).max(900),
+    swot: z.object({
+      strengths: z.array(handoffLabel).min(1).max(4),
+      weaknesses: z.array(handoffLabel).min(1).max(4),
+      opportunities: z.array(handoffLabel).min(1).max(4),
+      threats: z.array(handoffLabel).min(1).max(4),
+    }).strict(),
+    audiences: z.array(z.object({
+      segment: handoffLabel,
+      description: z.string().trim().min(1).max(400),
+      priority: z.enum(["primary", "secondary", "emerging"]),
+    }).strict()).min(1).max(5),
+  }).strict(),
 }).strict();
 export const marketingStrategyCalendarSchema = z.object({
   contentCalendar: outputShape.contentCalendar,
@@ -69,9 +85,19 @@ export const marketingStrategyCalendarInputSchema = z.object({
   strategyRequest: marketingStrategyInputSchema,
   executiveContext: z.object({
     title: marketingStrategyExecutiveSchema.shape.title,
-    executiveSummary: marketingStrategyExecutiveSchema.shape.executiveSummary,
-    targetAudience: marketingStrategyExecutiveSchema.shape.targetAudience,
-    platformStrategies: marketingStrategyExecutiveSchema.shape.platformStrategies,
-    marketingPriorities: marketingStrategyExecutiveSchema.shape.marketingPriorities,
+    executiveSummary: z.string().trim().min(1).max(600),
+    audiences: z.array(z.object({
+      segment: handoffLabel,
+      priority: z.enum(["primary", "secondary", "emerging"]),
+    }).strict()).min(1).max(5),
+    channels: z.array(z.object({
+      platform: z.string().trim().min(1).max(80),
+      objective: handoffLabel,
+      cadence: z.string().trim().min(1).max(80),
+    }).strict()).min(1).max(8),
+    priorities: z.array(z.object({
+      priority: handoffLabel,
+      timeframe: z.string().trim().min(1).max(80),
+    }).strict()).min(1).max(8),
   }).strict(),
 }).strict();

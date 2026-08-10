@@ -28,6 +28,8 @@ import type {
 type CompletedPart<T> = { contentId: string; output: T };
 type StrategyPart = "foundation" | "execution" | "calendar";
 
+function bounded(value: string, maximum: number) { return value.slice(0, maximum); }
+
 function partKey(idempotencyKey: string, part: StrategyPart) {
   const fingerprint = createHash("sha256").update(idempotencyKey).digest("hex");
   return "strategy:" + part + ":" + fingerprint;
@@ -77,7 +79,25 @@ export async function generateStrategy(businessId: string, input: MarketingStrat
     idempotencyKey: foundationKey,
   });
 
-  const executionInput: MarketingStrategyExecutionInput = { strategyRequest: input, foundation: foundation.output };
+  const executionInput: MarketingStrategyExecutionInput = {
+    strategyRequest: input,
+    foundation: {
+      title: foundation.output.title,
+      executiveSummary: bounded(foundation.output.executiveSummary, 900),
+      position: bounded(foundation.output.businessAnalysis.position, 900),
+      swot: {
+        strengths: foundation.output.swot.strengths.slice(0, 4).map((item) => bounded(item, 160)),
+        weaknesses: foundation.output.swot.weaknesses.slice(0, 4).map((item) => bounded(item, 160)),
+        opportunities: foundation.output.swot.opportunities.slice(0, 4).map((item) => bounded(item, 160)),
+        threats: foundation.output.swot.threats.slice(0, 4).map((item) => bounded(item, 160)),
+      },
+      audiences: foundation.output.targetAudience.map((item) => ({
+        segment: bounded(item.segment, 160),
+        description: bounded(item.description, 400),
+        priority: item.priority,
+      })),
+    },
+  };
   const savedExecution = await loadCompletedPart(supabase, businessId, executionKey, "marketing_strategy_execution", marketingStrategyExecutionSchema);
   const execution = savedExecution ?? await runAIRequest<MarketingStrategyExecutionInput, MarketingStrategyExecution>({
     businessId,
@@ -93,10 +113,20 @@ export async function generateStrategy(businessId: string, input: MarketingStrat
     strategyRequest: input,
     executiveContext: {
       title: executive.title,
-      executiveSummary: executive.executiveSummary,
-      targetAudience: executive.targetAudience,
-      platformStrategies: executive.platformStrategies,
-      marketingPriorities: executive.marketingPriorities,
+      executiveSummary: bounded(executive.executiveSummary, 600),
+      audiences: executive.targetAudience.map((item) => ({
+        segment: bounded(item.segment, 160),
+        priority: item.priority,
+      })),
+      channels: executive.platformStrategies.map((item) => ({
+        platform: bounded(item.platform, 80),
+        objective: bounded(item.objective, 160),
+        cadence: bounded(item.cadence, 80),
+      })),
+      priorities: executive.marketingPriorities.map((item) => ({
+        priority: bounded(item.priority, 160),
+        timeframe: bounded(item.timeframe, 80),
+      })),
     },
   };
   const savedCalendar = await loadCompletedPart(supabase, businessId, calendarKey, "marketing_strategy_calendar", marketingStrategyCalendarSchema);
