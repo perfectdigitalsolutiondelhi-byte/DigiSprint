@@ -2,11 +2,12 @@
 import { randomUUID } from "node:crypto";
 import { redirect } from "next/navigation";
 import { loadBusinessContext } from "../../lib/ai/context/business-context";
-import { AIPlatformError, normalizeAIError } from "../../lib/ai/errors";
+import { normalizeAIError } from "../../lib/ai/errors";
 import { getPrompt } from "../../lib/ai/prompts/registry";
 import { loadAISettings } from "../../lib/ai/settings";
 import { marketingStrategyInputSchema, strategyActionSchema } from "../../lib/marketing-strategy/schemas";
 import { requireStrategyWorkspace } from "../../lib/marketing-strategy/authorization";
+import { requireStrategyOwnerWorkspace } from "../../lib/marketing-strategy/review-authorization";
 import { createStrategyFingerprint, findCachedStrategy } from "../../lib/marketing-strategy/cache";
 import { loadStrategyById } from "../../lib/marketing-strategy/queries";
 import { generateStrategy } from "../../lib/marketing-strategy/service";
@@ -35,19 +36,10 @@ export async function generateMarketingStrategy(_state: StrategyActionState, for
   }
   redirect(destination);
 }
-export async function acceptMarketingStrategy(formData: FormData) {
-  const parsed = strategyActionSchema.safeParse({ strategyId: formData.get("strategyId") });
-  if (!parsed.success) return;
-  const { supabase, business } = await requireStrategyWorkspace(`/strategy/${parsed.data.strategyId}`);
-  const { error } = await supabase.rpc("accept_marketing_strategy", { target_business_id: business.id, target_strategy_id: parsed.data.strategyId });
-  if (error?.code === "P0002") throw new AIPlatformError("CONFLICT", "This strategy is no longer available to accept.", error);
-  if (error) throw new AIPlatformError("STORAGE_ERROR", "Unable to accept this strategy.", error);
-  redirect(`/strategy/${parsed.data.strategyId}?accepted=1`);
-}
 export async function regenerateMarketingStrategy(formData: FormData) {
   const parsed = strategyActionSchema.safeParse({ strategyId: formData.get("strategyId") });
   if (!parsed.success) return;
-  const { supabase, business } = await requireStrategyWorkspace(`/strategy/${parsed.data.strategyId}`);
+  const { supabase, business } = await requireStrategyOwnerWorkspace(`/strategy/${parsed.data.strategyId}`);
   const source = await loadStrategyById(supabase, business.id, parsed.data.strategyId);
   if (!source) return;
   let destination: string;
