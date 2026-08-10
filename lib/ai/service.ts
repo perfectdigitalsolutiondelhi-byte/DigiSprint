@@ -43,7 +43,7 @@ export async function runAIRequest<TInput, TOutput>(request: AIRequest<TInput>):
     });
     const providerResult = await provider.generateStructured({
       schema: prompt.outputSchema, schemaName: prompt.schemaName, systemPrompt: rendered.systemPrompt,
-      userPrompt: rendered.userPrompt, model, timeoutMs, maxOutputTokens: settings.maxOutputTokens,
+      userPrompt: rendered.userPrompt, model, timeoutMs, maxOutputTokens: Math.max(settings.maxOutputTokens, prompt.minimumOutputTokens ?? 0),
     });
     const output = prompt.outputSchema.parse(providerResult.data) as TOutput;
     const contentId = await completeAIJob(supabase, {

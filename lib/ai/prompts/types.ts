@@ -8,6 +8,7 @@ export type PromptDefinition<TInput, TOutput> = {
   inputSchema: z.ZodType<TInput>;
   outputSchema: z.ZodType<TOutput>;
   modelProfile: AIModelProfile;
+  minimumOutputTokens?: number;
   system: string;
   render: (input: TInput, context: BusinessAIContext) => string;
 };
