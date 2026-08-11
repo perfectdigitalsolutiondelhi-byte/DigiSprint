@@ -52,6 +52,7 @@ export type AIRequest<TInput> = {
   input: TInput;
   language: string;
   idempotencyKey: string;
+  requestFingerprint?: string;
 };
 
 export type AIResult<TOutput> = {

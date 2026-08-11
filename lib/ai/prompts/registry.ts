@@ -6,6 +6,7 @@ import { marketingStrategyExecutionPrompt } from "./marketing-strategy-execution
 import { marketingStrategyCalendarPrompt } from "./marketing-strategy-calendar.prompt";
 import { weeklyStrategyFoundationPrompt } from "./weekly-strategy-foundation.prompt";
 import { weeklyStrategyWeekPrompt } from "./weekly-strategy-week.prompt";
+import { weeklyPostGeneratorPrompt } from "./weekly-post-generator.prompt";
 import type { PromptDefinition } from "./types";
 
 const registry = new Map<string, PromptDefinition<unknown, unknown>>([
@@ -16,6 +17,7 @@ const registry = new Map<string, PromptDefinition<unknown, unknown>>([
   [marketingStrategyCalendarPrompt.key, marketingStrategyCalendarPrompt as PromptDefinition<unknown, unknown>],
   [weeklyStrategyFoundationPrompt.key, weeklyStrategyFoundationPrompt as PromptDefinition<unknown, unknown>],
   [weeklyStrategyWeekPrompt.key, weeklyStrategyWeekPrompt as PromptDefinition<unknown, unknown>],
+  [weeklyPostGeneratorPrompt.key, weeklyPostGeneratorPrompt as PromptDefinition<unknown, unknown>],
 ]);
 
 export function getPrompt(key: string) {

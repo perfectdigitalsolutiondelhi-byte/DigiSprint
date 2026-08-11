@@ -5,7 +5,7 @@ import { Brand } from "../ui/Brand";
 const navItems = [
   { label: "Overview", href: "/dashboard", icon: "\u2302" },
   { label: "Strategy", href: "/strategy", icon: "\u2726" },
-  { label: "Posts", href: "/dashboard#posts", icon: "\u25A3" },
+  { label: "Posts", href: "/post-generator", icon: "\u25A3" },
   { label: "Festivals", href: "/dashboard#festivals", icon: "\u25EB" },
   { label: "AI Tools", href: "/dashboard#tools", icon: "\u2318" },
   { label: "Seekhein", href: "/dashboard#learn", icon: "\u25C9" },

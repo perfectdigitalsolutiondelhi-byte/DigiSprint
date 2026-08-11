@@ -31,9 +31,9 @@ export async function runAIRequest<TInput, TOutput>(request: AIRequest<TInput>):
     const promptContext = settings.includeBusinessContext ? context : { ...context, description: "", audience: "", platforms: [], goals: [] };
     const prompt = getPrompt(request.promptKey);
     const rendered = renderPrompt(prompt, request.input, promptContext);
-    const requestFingerprint = request.featureKey === "marketing_strategy"
+    const requestFingerprint = request.requestFingerprint ?? (request.featureKey === "marketing_strategy"
       ? createStrategyFingerprint({ context: promptContext, input: rendered.parsedInput as MarketingStrategyInput, promptKey: prompt.key, promptVersion: prompt.version, modelProfile: settings.modelProfile || prompt.modelProfile })
-      : null;
+      : null);
     const { provider, model, timeoutMs } = resolveProvider(settings.modelProfile || prompt.modelProfile);
     validateCostConfiguration();
     jobId = await startAIJob(supabase, {
